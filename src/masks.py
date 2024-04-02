@@ -1,11 +1,33 @@
 def mask_card(information: str) -> str:
     """Функция принимает на вход номер карты и возвращает ее маску"""
-    return information[:4] + " " + information[4:6] + "** **** " + information[-4:]
+    if "Visa" in information or "MasterCard" in information:
+        words = information.split()
+        masked_str = ""
+        for word in words:
+            if word.isdigit() and len(word) == 16:
+                masked_word = word[:2] + "** **** " + word[-4:]
+                masked_str += masked_word + " "
+            else:
+                masked_str += word + " "
+        return masked_str.strip()
+    else:
+        return information
 
 
 def mask_account(information: str) -> str:
     """Функция принимает на вход номер счёта и возвращает его маску."""
-    return "**" + information[-4:]
+    if "Счет" in information:
+        words = information.split()
+        masked_str = ""
+        for word in words:
+            if word.isdigit() and len(word) >= 16:
+                maskedword = "**" + word[-4:]
+                masked_str += maskedword + " "
+            else:
+                masked_str += word + " "
+        return masked_str.strip()
+    else:
+        return information
 
 
 def get_data(d: str) -> str:
