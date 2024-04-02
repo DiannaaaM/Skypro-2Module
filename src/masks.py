@@ -9,4 +9,5 @@ def mask_account(information: str) -> str:
 
 
 def get_data(d: str) -> str:
-    return
+    """ Функция, которая принимает на вход строку и возвращает строку с датой"""
+    return f'{d[8:10]}.{d[5:7]}.{d[0:4]}'
