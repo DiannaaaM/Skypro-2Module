@@ -1,4 +1,4 @@
-def mask_card(information: str) -> str:
+def new_mask_card(information: str) -> str:
     """Функция принимает на вход номер карты и возвращает ее маску"""
     if "Visa" in information or "MasterCard" in information:
         words = information.split()
@@ -14,7 +14,7 @@ def mask_card(information: str) -> str:
         return information
 
 
-def mask_account(information: str) -> str:
+def new_mask_account(information: str) -> str:
     """Функция принимает на вход номер счёта и возвращает его маску."""
     if "Счет" in information:
         words = information.split()
