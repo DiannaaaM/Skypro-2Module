@@ -12,5 +12,7 @@ def sorted_list_by_value(input_list: list, state='EXECUTED') -> list:
 
 
 def sort_dicts_by_date(input_list, reverse='desc'):
+    """Функция, которая принимает на вход список словарей
+    и возвращает новый список, в котором исходные словари отсортированы по убыванию даты"""
     return sorted(input_list, key=lambda x: datetime.strptime(x['date'], '%Y-%m-%dT%H:%M:%S.%f'),
                   reverse=(reverse == 'desc'))
