@@ -1,4 +1,5 @@
-from src.masks import mask_card, mask_account
+from src.masks import mask_account, mask_card
+
 
 def mask_account_and_card(information: str) -> str:
     """Умеет работать как с картами, так и с счетами.
@@ -9,7 +10,6 @@ def mask_account_and_card(information: str) -> str:
         masked_str = ""
         for word in words:
             if word.isdigit() and len(word) >= 16:
-                #maskedword = "**" + word[-4:]
                 masked_str += mask_account(word) + " "
             else:
                 masked_str += word + " "
@@ -19,7 +19,6 @@ def mask_account_and_card(information: str) -> str:
         masked_str = ""
         for word in words:
             if word.isdigit() and len(word) >= 16:
-                #masked_word = word[:4] + " " + word[6:8] + "** **** " + word[-4:]
                 masked_str += mask_card(word) + " "
             else:
                 masked_str += word + " "
@@ -31,8 +30,6 @@ def mask_account_and_card(information: str) -> str:
 def get_data(d: str) -> str:
     """Функция, которая принимает на вход строку и возвращает строку с датой"""
     return f"{d[8:10]}.{d[5:7]}.{d[0:4]}"
-
-
 
 
 # def mask_account_and_card(information: str) -> str:
@@ -61,4 +58,3 @@ def get_data(d: str) -> str:
 #         return masked_str
 #     else:
 #         return information
-
