@@ -7,5 +7,5 @@ def test_mask_card() -> None:
 
 
 def test_mask_account() -> None:
-    assert mask_account("736541084301352874305") == "**4305"
+    assert mask_account("73654108430135874305") == "**4305"
     assert mask_account("08430135874305") == "08430135874305"
