@@ -8,8 +8,8 @@ def filter_by_currency(transactions: List[dict[str, int]], currency: str = "USD"
     и возвращает итератор, который выдает по очереди операции, в которых указана заданная валюта.
     """
     for transaction in transactions:
-        if transaction.get("currency") == currency:
-            yield transaction
+        if transaction.get("operationAmount", {}).get("currency", {}).get("code") == currency:
+            yield transaction["id"]
 
 
 def returned_description(transactions: List[dict]) -> Generator[str, None, None]:
@@ -27,4 +27,5 @@ def random_card_number(start: int, stop: int) -> Generator[int, None, None]:
     Должны быть сгенерированы номера карт в заданном диапазоне
     """
     while True:
-        yield random.randint(start, stop)
+        card_number = ''.join([str(random.randint(start, stop)) for _ in range(16)])
+        yield ' '.join(card_number[i:i+4] for i in range(0, len(card_number), 4))

@@ -1,4 +1,4 @@
-from src.generators import filter_by_currency, returned_description, random_card_number
+from src.generators import filter_by_currency
 
 
 @pytest.fixture()
@@ -80,5 +80,7 @@ def dict_for_functions() -> list[dict]:
             "to": "Счет 14211924144426031657"
         }
     ]
+
+
 def test_filter_by_currency(dict_for_functions):
-    assert filter_by_currency(dict_for_functions, 'USD') == 939719570
+    assert filter_by_currency(dict_for_functions, 'USD') == "939719570"

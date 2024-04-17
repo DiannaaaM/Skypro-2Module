@@ -119,15 +119,15 @@ transactions = (
 try:
     print(next(filter_by_currency(transactions, "USD")))
 except StopIteration:
-    print("No more transactions available.")
+    print("На этом все.")
 
 try:
     print(next(returned_description(transactions)))
 except StopIteration:
-    print("No more transactions available.")
+    print("Пока хватит.")
 
 try:
     next_transaction = next(random_card_number())
-    print(random_card_number('0000_0000_0000_0001', '9999_9999_9999_9999'))
+    print(random_card_number('1000', '9999'))
 except StopIteration:
-    print("No more transactions available.")
+    print("нужно еще?")
