@@ -1,5 +1,5 @@
 import random
-from typing import Any, Generator, Iterator, List
+from typing import Generator, Iterator, List
 
 
 def filter_by_currency(transactions: List[dict], currency: str = "USD") -> Iterator[dict]:
@@ -12,15 +12,15 @@ def filter_by_currency(transactions: List[dict], currency: str = "USD") -> Itera
             yield transaction["id"]
 
 
-def returned_description(transactions: List[dict]) -> Generator[Any, None, None]:
+def returned_description(transactions: List[dict]) -> Generator[str, None, None]:
     """
     Генератор, который принимает список словарей и возвращает описание каждой операции по очереди.
     """
     for transaction in transactions:
-        yield transaction.get("description")
+        yield str(transaction.get("description"))
 
 
-def random_card_number(start: int, stop: int) -> Generator[Any, None, None]:
+def random_card_number(start: int, stop: int) -> Generator[str, None, None]:
     """
     Генератор номеров банковских карт, который должен генерировать номера карт
     в формате "XXXX XXXX XXXX XXXX", где X — цифра.

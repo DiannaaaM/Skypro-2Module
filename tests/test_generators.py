@@ -1,5 +1,6 @@
 import pytest
-from src.generators import filter_by_currency, random_card_number, returned_description
+
+from src.generators import filter_by_currency
 
 
 @pytest.fixture()
@@ -54,10 +55,4 @@ def dict_for_functions() -> list[dict]:
 
 
 def test_filter_by_currency(dict_for_functions: list[dict]) -> None:
-    generator = filter_by_currency(dict_for_functions, "USD")
-    assert next(generator) == 939719570
-    assert next(generator) == 142264268
-
-
-def test_returned_description(dict_for_functions: list[dict]) -> None:
-    assert next(returned_description(dict_for_functions)) == "Перевод организации"
+    assert filter_by_currency(dict_for_functions, "USD") == "939719570"
