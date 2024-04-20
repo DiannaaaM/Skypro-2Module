@@ -9,8 +9,7 @@ def log(func: Callable) -> Callable:
     """Генератор, который записывает дату и операцию в файл"""
 
     @wraps(func)
-    def inner(*args: Any,
-          **kwargs: Any) -> Any:
+    def inner(*args: Any, **kwargs: Any) -> Any:
         logfile.write(f"Дата: {datetime.datetime.now()}  УСПЕШНО\n")
         return func(*args, *kwargs)
 
