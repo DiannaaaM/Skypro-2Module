@@ -1,3 +1,4 @@
+from typing import Any
 from unittest.mock import Mock, patch
 
 import pytest
@@ -6,7 +7,11 @@ from src.summ_amount import sum_amount
 
 
 @pytest.fixture()
-def dict_with_transactions() -> tuple[dict[str, str | dict[str, str | dict[str, str]] | int], dict[str, str | dict[str, str | dict[str, str]] | int]]:
+def dict_with_transactions() -> (
+    tuple[
+        dict[str, str | dict[str, str | dict[str, str]] | int], dict[str, str | dict[str, str | dict[str, str]] | int]
+    ]
+):
     return {
         "id": 957763565,
         "state": "EXECUTED",
@@ -26,5 +31,5 @@ def dict_with_transactions() -> tuple[dict[str, str | dict[str, str | dict[str, 
     }
 
 
-def test_sum_amount(dict_with_transactions: tuple) -> None:
+def test_sum_amount(dict_with_transactions: list[dict[Any, Any]]) -> None:
     assert sum_amount(dict_with_transactions) == 185795.22999999998

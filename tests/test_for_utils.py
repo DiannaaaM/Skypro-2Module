@@ -12,6 +12,5 @@ def path_to_json_file() -> str:
     return file
 
 
-def test_read_json_file(path_to_json_file) -> None:
-    # expected_data_length = 101
+def test_read_json_file(path_to_json_file: str) -> None:
     assert len(read_json_file(path_to_json_file)) == 101

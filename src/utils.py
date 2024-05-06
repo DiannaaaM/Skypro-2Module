@@ -3,7 +3,7 @@ import os
 from typing import Any
 
 
-def read_json_file(file_name: str) -> dict[str, Any]:
+def read_json_file(file_name: str) -> Any:
     """
     Читает json файл и возвращает данные в виде словаря
     """
