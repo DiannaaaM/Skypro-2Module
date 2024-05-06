@@ -13,6 +13,8 @@ def read_json_file(file_name: str) -> Any:
         return data
     except FileNotFoundError:
         return {}
+    except json.decoder.JSONDecodeError:
+        return {}
 
 
 file = os.path.abspath(os.path.join("..", "data", "operations.json"))
