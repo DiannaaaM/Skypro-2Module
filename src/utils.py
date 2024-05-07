@@ -18,7 +18,10 @@ def read_json_file(file_name: str) -> Any:
     try:
         with open(file_name, "r", encoding="utf-8") as f:
             data = json.load(f)
-        return data
+        if isinstance(data, dict):
+            return data
+        else:
+            return {}
     except FileNotFoundError:
         return {}
     except json.decoder.JSONDecodeError:
