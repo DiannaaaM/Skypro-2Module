@@ -1,10 +1,10 @@
 import datetime
 import logging
 from functools import wraps
-from typing import Any, Callable
+from typing import Any, Callable, Optional
 
 
-def log(filename: str | None = None) -> Callable:
+def log(filename: Optional[str] = None) -> Callable:
     def decorator(func: Callable) -> Callable:
         @wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
