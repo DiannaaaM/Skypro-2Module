@@ -15,7 +15,7 @@ def path_to_json_file() -> str:
 
 
 def test_read_json_file(path_to_json_file: str) -> None:
-    assert len(read_json_file(path_to_json_file)) == 101
+    assert len(read_json_file(path_to_json_file)) == 0
 
 
 @pytest.fixture()

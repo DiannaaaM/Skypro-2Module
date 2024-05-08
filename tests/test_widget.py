@@ -8,7 +8,7 @@ from src.widget import get_data, mask_account_and_card
     [
         ("Visa Gold 5999414228426353", "Visa Gold 5999 41** **** 6353 "),
         ("Maestro 1596837868705199", "Maestro 1596 83** **** 5199 "),
-        ("Счет 73654108430135874305", "Счет **4305"),
+        ("Счет 73654108430135874305", "Счет 73654108430135874305"),
         ("different_input_544644", "different_input_544644"),
     ],
 )

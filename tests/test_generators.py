@@ -55,4 +55,4 @@ def dict_for_functions() -> list[dict]:
 
 
 def test_filter_by_currency(dict_for_functions: list[dict]) -> None:
-    assert filter_by_currency(dict_for_functions, "USD") == "939719570"
+    assert next(filter_by_currency(dict_for_functions, "USD")) == 939719570
