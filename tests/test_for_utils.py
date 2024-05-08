@@ -14,17 +14,20 @@ def path_to_json_file() -> str:
     return file
 
 
-def test_read_json_file(path_to_json_file: str) -> None:
-    assert len(read_json_file(path_to_json_file)) == 0
+@patch("builtins.open", create=True)
+def test_read_file(mock_open: Any, path_to_json_file: str) -> None:
+    mock_file = mock_open.return_value. __enter__.return_value
+    mock_file.read.return_value = "test data"
+    assert read_json_file("test.txt") == []
 
 
 @pytest.fixture()
 def dict_with_transactions() -> List[dict]:
     return [
-    {
-        "operationAmount": {"amount": "87941.37", "currency": {"name": "руб.", "code": "RUB"}},
-    }
-]
+        {
+            "operationAmount": {"amount": "87941.37", "currency": {"name": "руб.", "code": "RUB"}},
+        }
+    ]
 
 
 def test_sum_amount(dict_with_transactions: List[dict]) -> None:
