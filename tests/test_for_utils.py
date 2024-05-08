@@ -21,16 +21,10 @@ def test_read_json_file(path_to_json_file: str) -> None:
 @pytest.fixture()
 def dict_with_transactions() -> List[dict]:
     return [
-        {
-            "id": 957763565,
-            "state": "EXECUTED",
-            "date": "2019-01-05T00:52:30.108534",
-            "operationAmount": {"amount": "87941.37", "currency": {"name": "руб.", "code": "RUB"}},
-            "description": "Перевод со счета на счет",
-            "from": "Счет 46363668439560358409",
-            "to": "Счет 18889008294666828266",
-        }
-    ]
+    {
+        "operationAmount": {"amount": "87941.37", "currency": {"name": "руб.", "code": "RUB"}},
+    }
+]
 
 
 def test_sum_amount(dict_with_transactions: List[dict]) -> None:
