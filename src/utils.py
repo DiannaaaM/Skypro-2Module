@@ -28,10 +28,6 @@ def read_json_file(file_name: str) -> Any:
         return []
 
 
-# file = os.path.abspath(os.path.join("..", "data", "operations.json"))
-# print(read_json_file(file))
-
-
 def get_currency_rate(currency: Any) -> Any:
     """Получает курс валюты от API и возвращает его в виде float"""
     url = f"https://api.apilayer.com/exchangerates_data/latest?symbols=RUB&base={currency}"
@@ -52,24 +48,3 @@ def sum_amount(transaction: List[dict]) -> float:
         elif t.get("operationAmount", {}).get("currency", {}).get("code") == "USD":
             total += float(t["operationAmount"]["amount"]) * get_currency_rate("USD")
     return total
-
-
-# transactions = [
-#     {
-#         "id": 441945886,
-#         "state": "EXECUTED",
-#         "date": "2019-08-26T10:50:58.294041",
-#         "operationAmount": {
-#             "amount": "31957.58",
-#             "currency": {
-#                 "name": "руб.",
-#                 "code": "RUB"
-#             }
-#         },
-#         "description": "Перевод организации",
-#         "from": "Maestro 1596837868705199",
-#         "to": "Счет 64686473678894779589"
-#     }
-# ]
-#
-# print(sum_amount(transactions))

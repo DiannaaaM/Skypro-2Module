@@ -2,6 +2,7 @@
 # from src.widget import get_data, mask_account_and_card
 # from src.processing import sort_dicts_by_date, sorted_list_by_value
 # from src.generators import filter_by_currency, returned_description, random_card_number
+# from src.utils import read_json_file, get_currency_rate, sum_amount
 
 # user_input = input("Номер карты:")
 # print(mask_account(user_input))
@@ -131,3 +132,26 @@
 #     print(random_card_number('1000', '9999'))
 # except StopIteration:
 #     print("нужно еще?")
+
+# file = os.path.abspath(os.path.join("..", "data", "operations.json"))
+# print(read_json_file(file))
+
+# transactions = [
+#     {
+#         "id": 441945886,
+#         "state": "EXECUTED",
+#         "date": "2019-08-26T10:50:58.294041",
+#         "operationAmount": {
+#             "amount": "31957.58",
+#             "currency": {
+#                 "name": "руб.",
+#                 "code": "RUB"
+#             }
+#         },
+#         "description": "Перевод организации",
+#         "from": "Maestro 1596837868705199",
+#         "to": "Счет 64686473678894779589"
+#     }
+# ]
+#
+# print(sum_amount(transactions))
