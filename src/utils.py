@@ -1,4 +1,5 @@
 import json
+import logging
 import os
 from datetime import datetime
 from typing import Any, Dict
@@ -47,3 +48,17 @@ def sum_amount(transaction: dict) -> float:
     elif transaction.get("operationAmount", {}).get("currency", {}).get("code") == "USD":
         total += float(transaction["operationAmount"]["amount"]) * get_currency_rate("USD")
     return total
+
+
+if os.path.isfile(os.path.join("../src/utils.log")):
+    os.remove(os.path.join("../src/utils.log"))
+
+logger = logging.getLogger(__name__)
+file_handler = logging.FileHandler("utils.log")
+file_formatter = logging.Formatter("%(asctime)s %(module)s \n\t%(levelname)s: %(message)s")
+file_handler.setFormatter(file_formatter)
+logger.addHandler(file_handler)
+
+logger.setLevel(logging.INFO)
+
+logger.info("SUCCESSFUL OPERATION")
