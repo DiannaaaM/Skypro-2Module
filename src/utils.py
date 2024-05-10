@@ -1,7 +1,7 @@
 import json
 import os
 from datetime import datetime
-from typing import Any, List
+from typing import Any, Dict
 
 import requests
 from dotenv import load_dotenv
@@ -47,22 +47,3 @@ def sum_amount(transaction: dict) -> float:
     elif transaction.get("operationAmount", {}).get("currency", {}).get("code") == "USD":
         total += float(transaction["operationAmount"]["amount"]) * get_currency_rate("USD")
     return total
-
-
-transactions = {
-        "id": 441945886,
-        "state": "EXECUTED",
-        "date": "2019-08-26T10:50:58.294041",
-        "operationAmount": {
-            "amount": "31957.58",
-            "currency": {
-                "name": "руб.",
-                "code": "RUB"
-            }
-        },
-        "description": "Перевод организации",
-        "from": "Maestro 1596837868705199",
-        "to": "Счет 64686473678894779589"
-    }
-
-print(sum_amount(transactions))

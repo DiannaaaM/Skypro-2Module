@@ -22,21 +22,19 @@ def test_read_file(mock_open: Any, path_to_json_file: str) -> None:
 
 
 @pytest.fixture()
-def dict_with_transactions() -> List[dict]:
-    return [
-        {
-            "id": 441945886,
-            "state": "EXECUTED",
-            "date": "2019-08-26T10:50:58.294041",
-            "operationAmount": {"amount": "31957.58", "currency": {"name": "руб.", "code": "RUB"}},
-            "description": "Перевод организации",
-            "from": "Maestro 1596837868705199",
-            "to": "Счет 64686473678894779589",
-        }
-    ]
+def dict_with_transactions() -> dict:
+    return {
+        "id": 441945886,
+        "state": "EXECUTED",
+        "date": "2019-08-26T10:50:58.294041",
+        "operationAmount": {"amount": "31957.58", "currency": {"name": "руб.", "code": "RUB"}},
+        "description": "Перевод организации",
+        "from": "Maestro 1596837868705199",
+        "to": "Счет 64686473678894779589",
+    }
 
 
-def test_sum_amount(dict_with_transactions: List[dict]) -> None:
+def test_sum_amount(dict_with_transactions: dict) -> None:
     assert sum_amount(dict_with_transactions) == 31957.58
 
 

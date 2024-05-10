@@ -136,8 +136,7 @@
 # file = os.path.abspath(os.path.join("..", "data", "operations.json"))
 # print(read_json_file(file))
 
-# transactions = [
-#     {
+# transactions = {
 #         "id": 441945886,
 #         "state": "EXECUTED",
 #         "date": "2019-08-26T10:50:58.294041",
@@ -152,6 +151,5 @@
 #         "from": "Maestro 1596837868705199",
 #         "to": "Счет 64686473678894779589"
 #     }
-# ]
 #
 # print(sum_amount(transactions))
