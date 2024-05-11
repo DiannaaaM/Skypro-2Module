@@ -7,9 +7,13 @@ from typing import Any, Dict
 import requests
 from dotenv import load_dotenv
 
-load_dotenv()
+from src.external_api import get_currency_rate
+from src.logger import setup_logging_for_utils
 
-API_KEY = os.getenv("API_KEY")
+logger = setup_logging_for_utils()
+logger.info("Application from utils starts....")
+
+logger.info("Running 'read_json_file' function")
 
 
 def read_json_file(file_name: str) -> Any:
@@ -29,13 +33,8 @@ def read_json_file(file_name: str) -> Any:
         return []
 
 
-def get_currency_rate(currency: Any) -> Any:
-    """Получает курс валюты от API и возвращает его в виде float"""
-    url = f"https://api.apilayer.com/exchangerates_data/latest?symbols=RUB&base={currency}"
-    response = requests.get(url, headers={"apikey": API_KEY}, timeout=5)
-    response_data = json.loads(response.text)
-    rate = response_data["rates"]["RUB"]
-    return rate
+logger.info("End 'read_json_file' function")
+logger.info("Running 'sum_amount' function")
 
 
 def sum_amount(transaction: dict) -> float:
@@ -50,15 +49,14 @@ def sum_amount(transaction: dict) -> float:
     return total
 
 
-if os.path.isfile(os.path.join("../src/utils.log")):
-    os.remove(os.path.join("../src/utils.log"))
-
-logger = logging.getLogger(__name__)
-file_handler = logging.FileHandler("utils.log")
-file_formatter = logging.Formatter("%(asctime)s %(module)s \n\t%(levelname)s: %(message)s")
-file_handler.setFormatter(file_formatter)
-logger.addHandler(file_handler)
-
-logger.setLevel(logging.INFO)
-
-logger.info("SUCCESSFUL OPERATION")
+logger.info("End 'sum_amount' function")
+logger.info("Application from utils finished")
+# logger = logging.getLogger(__name__)
+# file_handler = logging.FileHandler("utils.log")
+# file_formatter = logging.Formatter("%(asctime)s %(module)s \n\t%(levelname)s: %(message)s")
+# file_handler.setFormatter(file_formatter)
+# logger.addHandler(file_handler)
+#
+# logger.setLevel(logging.INFO)
+#
+# logger.info("SUCCESSFUL OPERATION")

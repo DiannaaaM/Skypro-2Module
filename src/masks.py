@@ -1,12 +1,22 @@
 import logging
 import os
 
+from src.logger import setup_logging_for_masks
+
+logger = setup_logging_for_masks()
+logger.info("Application from utils starts....")
+logger.info("Running 'mask_card' function")
+
 
 def mask_card(number: str) -> str:
     """Функция принимает на вход номер карты и возвращает ее маску"""
     if len(number) == 16:
         return number[:4] + " " + number[4:6] + "** **** " + number[-4:]
     return number
+
+
+logger.info("End 'mask_card' function")
+logger.info("Running 'mask_account' function")
 
 
 def mask_account(number: str) -> str:
@@ -16,15 +26,5 @@ def mask_account(number: str) -> str:
     return number
 
 
-if os.path.isfile(os.path.join("../src/masks.log")):
-    os.remove(os.path.join("../src/masks.log"))
-
-logger = logging.getLogger(__name__)
-file_handler = logging.FileHandler("masks.log")
-file_formatter = logging.Formatter("%(asctime)s %(module)s \n\t%(levelname)s: %(message)s")
-file_handler.setFormatter(file_formatter)
-logger.addHandler(file_handler)
-
-logger.setLevel(logging.INFO)
-
-logger.info("SUCCESSFUL OPERATION")
+logger.info("End 'mask_account' function")
+logger.info("Application from utils finished")

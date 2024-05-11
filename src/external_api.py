@@ -1,14 +1,20 @@
-import logging
+import json
+import os
+from datetime import datetime
+from typing import Any, Dict
 
-logger = logging.getLogger("external_api")
-console_handler = logging.StreamHandler()
-console_formatter = logging.Formatter("\t%(module)s: %(asctime)s \n%(levelname)s - %(message)s\n")
-console_handler.setFormatter(console_formatter)
-logger.addHandler(console_handler)
-logger.setLevel(logging.DEBUG)
+import requests
+from dotenv import load_dotenv
 
-logger.debug("Debug message")
-logger.info("Info message")
-logger.warning("Warning message")
-logger.error("Error message")
-logger.critical("Critical message")
+load_dotenv()
+
+API_KEY = os.getenv("API_KEY")
+
+
+def get_currency_rate(currency: Any) -> Any:
+    """Получает курс валюты от API и возвращает его в виде float"""
+    url = f"https://api.apilayer.com/exchangerates_data/latest?symbols=RUB&base={currency}"
+    response = requests.get(url, headers={"apikey": API_KEY}, timeout=15)
+    response_data = json.loads(response.text)
+    rate = response_data["rates"]["RUB"]
+    return rate
