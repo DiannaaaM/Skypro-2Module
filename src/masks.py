@@ -1,9 +1,9 @@
 import logging
 import os
 
-from src.logger import setup_logging_for_masks
+from src.logger import setup_logging
 
-logger = setup_logging_for_masks()
+logger = setup_logging()
 logger.info("Application from utils starts....")
 logger.info("Running 'mask_card' function")
 

@@ -8,9 +8,9 @@ import requests
 from dotenv import load_dotenv
 
 from src.external_api import get_currency_rate
-from src.logger import setup_logging_for_utils
+from src.logger import setup_logging
 
-logger = setup_logging_for_utils()
+logger = setup_logging()
 logger.info("Application from utils starts....")
 
 logger.info("Running 'read_json_file' function")

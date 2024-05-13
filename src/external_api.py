@@ -6,9 +6,9 @@ from typing import Any, Dict
 import requests
 from dotenv import load_dotenv
 
-from src.logger import setup_logging_for_external_API
+from src.logger import setup_logging
 
-logger = setup_logging_for_external_API()
+logger = setup_logging()
 logger.info("Application from utils starts....")
 
 logger.info("Running 'get_currency_rate' function")
