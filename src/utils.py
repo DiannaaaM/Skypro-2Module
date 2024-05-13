@@ -33,7 +33,7 @@ def read_json_file(file_name: str) -> Any:
         return []
 
 
-logger.info("End 'read_json_file' function")
+logger.info(f"End 'read_json_file' function \n\tReturn: {read_json_file}")
 logger.info("Running 'sum_amount' function")
 
 
@@ -49,7 +49,7 @@ def sum_amount(transaction: dict) -> float:
     return total
 
 
-logger.info("End 'sum_amount' function")
+logger.info(f"End 'sum_amount' function \n\tReturn: {sum_amount}")
 logger.info("Application from utils finished")
 # logger = logging.getLogger(__name__)
 # file_handler = logging.FileHandler("utils.log")
