@@ -17,4 +17,3 @@ def setup_logging() -> Any:
     file_formatter = logging.Formatter("%(asctime)s %(module)s %(levelname)s: %(message)s")
     file_handler.setFormatter(file_formatter)
     logger.setLevel(logging.INFO)
-    return logger

@@ -23,14 +23,14 @@ def read_json_file(file_name: str) -> Any:
     try:
         with open(file_name, "r", encoding="utf-8") as f:
             data = json.load(f)
-        if isinstance(data, list):
-            return data
-        else:
-            return []
+        logging.info("Функция read_json_file выполнена успешно")
+        return data
     except FileNotFoundError:
-        return []
+        logging.error("Файл не найден")
+        return {}
     except json.decoder.JSONDecodeError:
-        return []
+        logging.error("Ошибка декодирования JSON")
+        return {}
 
 
 logger.info(f"End 'read_json_file' function \n\tReturn: {read_json_file}")
@@ -46,17 +46,12 @@ def sum_amount(transaction: dict) -> float:
         total += float(transaction["operationAmount"]["amount"]) * get_currency_rate("EUR")
     elif transaction.get("operationAmount", {}).get("currency", {}).get("code") == "USD":
         total += float(transaction["operationAmount"]["amount"]) * get_currency_rate("USD")
+    if total:
+        logging.info("Функция sum_amount выполнена успешно")
+    else:
+        logging.error("С функцией sum_amount что-то пошло не так: %(error)s")
     return total
 
 
 logger.info(f"End 'sum_amount' function \n\tReturn: {sum_amount}")
 logger.info("Application from utils finished")
-# logger = logging.getLogger(__name__)
-# file_handler = logging.FileHandler("utils.log")
-# file_formatter = logging.Formatter("%(asctime)s %(module)s \n\t%(levelname)s: %(message)s")
-# file_handler.setFormatter(file_formatter)
-# logger.addHandler(file_handler)
-#
-# logger.setLevel(logging.INFO)
-#
-# logger.info("SUCCESSFUL OPERATION")

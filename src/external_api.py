@@ -1,4 +1,5 @@
 import json
+import logging
 import os
 from datetime import datetime
 from typing import Any, Dict
@@ -23,6 +24,10 @@ def get_currency_rate(currency: Any) -> Any:
     response = requests.get(url, headers={"apikey": API_KEY}, timeout=15)
     response_data = json.loads(response.text)
     rate = response_data["rates"]["RUB"]
+    if rate:
+        logging.info("Функция get_currency_rate выполнена успешно")
+    else:
+        logging.error("С функцией get_currency_rate что-то пошло не так: %(error)s")
     return rate
 
 
