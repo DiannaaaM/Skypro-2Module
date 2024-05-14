@@ -10,9 +10,8 @@ from dotenv import load_dotenv
 from src.logger import setup_logging
 
 logger = setup_logging()
-logger.info("Application from utils starts....")
+logger.info("Application from external_api starts....")
 
-logger.info("Running 'get_currency_rate' function")
 load_dotenv()
 
 API_KEY = os.getenv("API_KEY")
@@ -31,5 +30,4 @@ def get_currency_rate(currency: Any) -> Any:
     return rate
 
 
-logger.info("End 'get_currency_rate' function")
-logger.info("Application from utils finished")
+logger.info("Application from external_api finished")

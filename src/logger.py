@@ -1,19 +1,22 @@
 import logging
 import os
+from logging import Logger
 from typing import Any
 
 if os.path.isfile(os.path.join("../src/utils.log")):
     os.remove(os.path.join("../src/utils.log"))
 if os.path.isfile(os.path.join("../src/masks.log")):
     os.remove(os.path.join("../src/masks.log"))
-if os.path.isfile(os.path.join("../src/external_API.log")):
-    os.remove(os.path.join("../src/external_API.log"))
+if os.path.isfile(os.path.join("../src/app.log")):
+    os.remove(os.path.join("../src/app.log"))
 
 
-def setup_logging() -> Any:
+def setup_logging() -> Logger:
     logger = logging.getLogger(__name__)
-    file_handler = logging.FileHandler(f"{logger}.log")
+    logger.setLevel(logging.DEBUG)
+
+    file_handler = logging.FileHandler(f"{logger}.log", mode="w")
+    file_handler.setFormatter(logging.Formatter("%(asctime)s - %(module)s - %(levelname)s - %(message)s"))
     logger.addHandler(file_handler)
-    file_formatter = logging.Formatter("%(asctime)s %(module)s %(levelname)s: %(message)s")
-    file_handler.setFormatter(file_formatter)
-    logger.setLevel(logging.INFO)
+
+    return logger

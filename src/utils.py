@@ -13,8 +13,6 @@ from src.logger import setup_logging
 logger = setup_logging()
 logger.info("Application from utils starts....")
 
-logger.info("Running 'read_json_file' function")
-
 
 def read_json_file(file_name: str) -> Any:
     """
@@ -23,18 +21,14 @@ def read_json_file(file_name: str) -> Any:
     try:
         with open(file_name, "r", encoding="utf-8") as f:
             data = json.load(f)
-        logging.info("Функция read_json_file выполнена успешно")
+        logger.info("Функция read_json_file выполнена успешно".encode("utf-8"))
         return data
     except FileNotFoundError:
-        logging.error("Файл не найден")
+        logger.error("Файл не найден")
         return {}
     except json.decoder.JSONDecodeError:
-        logging.error("Ошибка декодирования JSON")
+        logger.error("Ошибка декодирования JSON")
         return {}
-
-
-logger.info(f"End 'read_json_file' function \n\tReturn: {read_json_file}")
-logger.info("Running 'sum_amount' function")
 
 
 def sum_amount(transaction: dict) -> float:
@@ -53,5 +47,4 @@ def sum_amount(transaction: dict) -> float:
     return total
 
 
-logger.info(f"End 'sum_amount' function \n\tReturn: {sum_amount}")
 logger.info("Application from utils finished")
