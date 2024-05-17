@@ -3,12 +3,8 @@ import os
 from logging import Logger
 from typing import Any
 
-if os.path.isfile(os.path.join("../src/utils.log")):
-    os.remove(os.path.join("../src/utils.log"))
-if os.path.isfile(os.path.join("../src/masks.log")):
-    os.remove(os.path.join("../src/masks.log"))
-if os.path.isfile(os.path.join("../src/app.log")):
-    os.remove(os.path.join("../src/app.log"))
+if os.path.isfile(os.path.join("../src/src.logger.log")):
+    os.remove(os.path.join("../src/src.logger.log"))
 
 
 def setup_logging() -> Logger:

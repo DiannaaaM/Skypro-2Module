@@ -11,7 +11,6 @@ from src.external_api import get_currency_rate
 from src.logger import setup_logging
 
 logger = setup_logging()
-logger.info("Application from utils starts....")
 
 
 def read_json_file(file_name: str) -> Any:
@@ -45,6 +44,3 @@ def sum_amount(transaction: dict) -> float:
     else:
         logging.error("С функцией sum_amount что-то пошло не так: %(error)s")
     return total
-
-
-logger.info("Application from utils finished")

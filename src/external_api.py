@@ -10,7 +10,6 @@ from dotenv import load_dotenv
 from src.logger import setup_logging
 
 logger = setup_logging()
-logger.info("Application from external_api starts....")
 
 load_dotenv()
 
@@ -28,6 +27,3 @@ def get_currency_rate(currency: Any) -> Any:
     else:
         logging.error("С функцией get_currency_rate что-то пошло не так: %(error)s")
     return rate
-
-
-logger.info("Application from external_api finished")

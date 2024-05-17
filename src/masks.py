@@ -4,7 +4,6 @@ import os
 from src.logger import setup_logging
 
 logger = setup_logging()
-logger.info("Application from utils starts....")
 
 
 def mask_card(number: str) -> str:
@@ -28,8 +27,6 @@ def mask_account(number: str) -> str:
         logger.error("С функцией mask_account что-то пошло не так")
     return number
 
-
-logger.info("Application from utils finished")
 
 if __name__ == "__main__":
     mask_card("1234567890123456")
