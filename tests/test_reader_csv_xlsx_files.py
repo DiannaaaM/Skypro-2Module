@@ -13,13 +13,9 @@ def test_read_csv() -> None:
 @patch("pandas.read_excel", create=True)
 def test_read_xlsx(mock_open: Any) -> None:
     mock_file = mock_open()
-    mock_file.enter().read.return_value = pd.DataFrame({
-        "id": ["1", "2"],
-        "first_name": ["John", "Jane"],
-        "last_name": ["Doe", "Smith"]
-    })
-    assert open_file("test.xlsx").equals(pd.DataFrame({
-        "id": ["1", "2"],
-        "first_name": ["John", "Jane"],
-        "last_name": ["Doe", "Smith"]
-    }))
+    mock_file.enter().read.return_value = pd.DataFrame(
+        {"id": ["1", "2"], "first_name": ["John", "Jane"], "last_name": ["Doe", "Smith"]}
+    )
+    assert open_file("test.xlsx").equals(
+        pd.DataFrame({"id": ["1", "2"], "first_name": ["John", "Jane"], "last_name": ["Doe", "Smith"]})
+    )
