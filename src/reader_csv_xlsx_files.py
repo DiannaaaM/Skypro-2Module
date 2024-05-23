@@ -5,6 +5,7 @@ import pandas as pd
 
 
 def open_file(file_path: Any) -> Any:
+    """Открытие файлов с '.xlsx' или '.csv' расширениями"""
     transcriptions = []
     if file_path.endswith(".csv"):
         with open(file_path, "r", encoding="utf-8") as f:
@@ -23,7 +24,6 @@ def open_file(file_path: Any) -> Any:
                         "description": row[8],
                     }
                 )
-                # Добавляем строку в список
         transcriptions.pop(0)
         return transcriptions
     elif file_path.endswith(".xlsx"):

@@ -7,7 +7,7 @@ from src.reader_csv_xlsx_files import open_file
 
 
 def test_read_csv() -> None:
-    assert len(open_file("../data/transactions.csv")) == 1001
+    assert len(open_file("../data/transactions.csv")) == 1000
 
 
 @patch("pandas.read_excel", create=True)

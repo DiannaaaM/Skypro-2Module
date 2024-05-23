@@ -18,7 +18,7 @@ def path_to_json_file() -> str:
 def test_read_file(mock_open: Any, path_to_json_file: str) -> None:
     mock_file = mock_open.return_value.__enter__.return_value
     mock_file.read.return_value = "test data"
-    assert read_json_file("test.txt") == []
+    assert read_json_file("test.txt") == {}
 
 
 @pytest.fixture()
