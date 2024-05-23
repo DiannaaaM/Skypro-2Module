@@ -24,6 +24,7 @@ def open_file(file_path: Any) -> Any:
                     }
                 )
                 # Добавляем строку в список
+        transcriptions.pop(0)
         return transcriptions
     elif file_path.endswith(".xlsx"):
         df = pd.read_excel(file_path)
@@ -33,4 +34,4 @@ def open_file(file_path: Any) -> Any:
 
 
 # print(open_file('../data/transactions.csv'))
-print(open_file('../data/transactions_excel.xlsx'))
+# print(open_file('../data/transactions_excel.xlsx'))
