@@ -4,7 +4,7 @@ from typing import Any
 import pandas as pd
 
 
-def open_file(file_path: Any) -> Any:
+def open_file(file_path: str) -> Any:
     """Открытие файлов с '.xlsx' или '.csv' расширениями"""
     transcriptions = []
     if file_path.endswith(".csv"):
