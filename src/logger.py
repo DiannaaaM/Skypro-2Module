@@ -8,6 +8,7 @@ if os.path.isfile(os.path.join("../src/src.logger.log")):
 
 
 def setup_logging() -> Logger:
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s", encoding="utf-8")
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.DEBUG)
 
