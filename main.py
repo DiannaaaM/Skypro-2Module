@@ -12,7 +12,7 @@ from src.utils import read_json_file, sum_amount
 from src.widget import get_data, mask_account_and_card
 
 
-def calling_functions(
+def main(
     user_input: str,
     path_to_file: str,
     type_of_sort: str,
@@ -69,7 +69,7 @@ user_currency = input("Выводить только рублевые траза
 Verification_filter_of_word = input("Отфильтровать список транзакций по определенному слову в описании? Да/Нет")
 if Verification_filter_of_word == "Да":
     filter_by_word = input("Введите описание, по которому необходимо отсортировать\n").lower()
-result = calling_functions(user_input, user_path_to_file, type_of_sort, sort_of_date, user_currency, filter_by_word)
+result = main(user_input, user_path_to_file, type_of_sort, sort_of_date, user_currency, filter_by_word)
 print("Распечатываю итоговый список транзакций...")
 time.sleep(1)
 print(result)
