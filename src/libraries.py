@@ -2,13 +2,15 @@ import re
 from collections import Counter
 from typing import Any, Dict
 
+from src.utils import read_json_file
+
 
 def filter_by_state(transactions: list, search: str) -> list:
     """Функция, которая принимает на вход список словарей и значение для ключа
     и возвращает новый список, содержащий только те словари, у которых ключ содержит переданное в функцию значение."""
     result = []
     for transaction in transactions:
-        if re.search(search, transaction["description"]):
+        if "description" in transaction and re.search(search, transaction["description"]):
             result.append(transaction)
     return result
 
@@ -45,9 +47,9 @@ def count_categories(transactions: list) -> Dict[str, int]:
 #         "to": "Счет 35383033474447895560",
 #     },
 # ]
-#
-# result = count_categories(transactions)
+
+# result = count_categories(read_json_file("../data/operations.json"))
 # print(result)
 
-# res = filter_by_state(transactions, "Перевод со ")
-# print(res)
+res = filter_by_state((read_json_file("../data/operations.json")), "Перевод организации")
+print(res)

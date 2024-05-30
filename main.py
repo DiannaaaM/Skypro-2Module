@@ -13,38 +13,37 @@ from src.widget import get_data, mask_account_and_card
 
 
 def main(
-    user_input: str,
-    path_to_file: str,
-    type_of_sort: str,
-    currency: Any = None,
-    sort_of_date: Any = None,
-    filter_by_word: Any = None,
+    user_input: str, type_of_sort: str, currency: Any = None, sort_of_date: Any = None, filter_by_word: Any = None
 ) -> str:
-    """
-    Функция, которая обрабатывает данные о финансовых транзакциях из файла на основе пользовательского ввода.
-    """
+    # Основная функция для обработки данных о финансовых транзакциях
     if user_input == "1":
-        file = read_json_file(path_to_file)
+        file = read_json_file("/data/operations.json")
+    elif user_input == "2":
+        file = open_file("/data/transactions.csv")
     else:
-        file = open_file(path_to_file)
+        file = open_file("/data/transactions_excel.xlsx.xlsx")
+
     sort = sorted_list_by_value(file, type_of_sort.upper())
+
     if sort_of_date == "да":
         reverse_value = "asc" if sort_of_date == "по возрастанию" else "desc"
         sort = sort_dicts_by_date(sort, reverse_value)
+
     if currency == "да":
         for value in sort:
             value["amount"] = round(value["amount"] * get_currency_rate(value["operationAmount"]["currency"]["code"]))
+
     if filter_by_word is not None:
         sort = filter_by_word(sort, filter_by_word)
+
     for value in sort:
         date = get_data(value["date"])
         description = value["description"]
         from_ = mask_account_and_card(value["from"])
         to = mask_account_and_card(value["to"])
         amount = value["operationAmount"]["amount"]
-    return f"""{date} {description}
-            {from_} -> {to} 
-            Сумма: {amount}"""
+
+    return f"{date} {description}\n{from_} -> {to}\nСумма: {amount}\n"
 
 
 print(
@@ -57,7 +56,6 @@ print(
 user_input = input("выберите\t\t")
 if user_input not in ["1", "2", "3"]:
     print("Но такого варианта нет... " "\nПопробуйте еще раз")
-user_path_to_file = input("Введите путь до файла:\n")
 type_of_sort = input(
     """Введите статус по которому необходимо выполнить фильтрацию. 
 Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING"""
@@ -69,7 +67,7 @@ user_currency = input("Выводить только рублевые траза
 Verification_filter_of_word = input("Отфильтровать список транзакций по определенному слову в описании? Да/Нет")
 if Verification_filter_of_word == "Да":
     filter_by_word = input("Введите описание, по которому необходимо отсортировать\n").lower()
-result = main(user_input, user_path_to_file, type_of_sort, sort_of_date, user_currency, filter_by_word)
+result = main(user_input, type_of_sort, sort_of_date, user_currency, filter_by_word)
 print("Распечатываю итоговый список транзакций...")
 time.sleep(1)
 print(result)
