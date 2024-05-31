@@ -14,7 +14,7 @@ from src.widget import get_data, mask_account_and_card
 
 def main(
     user_input: str, type_of_sort: str, currency: Any = None, sort_of_date: Any = None, filter_by_word: Any = None
-) -> str:
+) -> Any:
     # Основная функция для обработки данных о финансовых транзакциях
     if user_input == "1":
         file = read_json_file("../data/operations.json")
