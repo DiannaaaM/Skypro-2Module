@@ -17,11 +17,11 @@ def main(
 ) -> str:
     # Основная функция для обработки данных о финансовых транзакциях
     if user_input == "1":
-        file = read_json_file("/data/operations.json")
+        file = read_json_file("../data/operations.json")
     elif user_input == "2":
-        file = open_file("/data/transactions.csv")
+        file = open_file("../data/transactions.csv")
     else:
-        file = open_file("/data/transactions_excel.xlsx.xlsx")
+        file = open_file("../data/transactions_excel.xlsx.xlsx")
 
     sort = sorted_list_by_value(file, type_of_sort.upper())
 
@@ -36,6 +36,7 @@ def main(
     if filter_by_word is not None:
         sort = filter_by_word(sort, filter_by_word)
 
+    result = []
     for value in sort:
         date = get_data(value["date"])
         description = value["description"]
@@ -43,7 +44,9 @@ def main(
         to = mask_account_and_card(value["to"])
         amount = value["operationAmount"]["amount"]
 
-    return f"{date} {description}\n{from_} -> {to}\nСумма: {amount}\n"
+        result.append(f"{date} {description}\n{from_} -> {to}\nСумма: {amount}\n")
+
+    return result
 
 
 print(
@@ -56,18 +59,23 @@ print(
 user_input = input("выберите\t\t")
 if user_input not in ["1", "2", "3"]:
     print("Но такого варианта нет... " "\nПопробуйте еще раз")
+
 type_of_sort = input(
     """Введите статус по которому необходимо выполнить фильтрацию. 
 Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING"""
 )
 verification_date = input("Отсортировать операции по дате? Да/Нет").lower()
-if verification_date == "Да":
-    sort_of_date = input("Отсортировать по:" "\n1. возрастанию" "\n.убыванию")
+sort_of_date = None
+if verification_date == "да":
+    sort_of_date = input("Отсортировать по:" "\n1. возрастанию" "\n2. убыванию")
+
 user_currency = input("Выводить только рублевые тразакции? Да/Нет")
 Verification_filter_of_word = input("Отфильтровать список транзакций по определенному слову в описании? Да/Нет")
+filter_by_word = None
 if Verification_filter_of_word == "Да":
     filter_by_word = input("Введите описание, по которому необходимо отсортировать\n").lower()
+
 result = main(user_input, type_of_sort, sort_of_date, user_currency, filter_by_word)
 print("Распечатываю итоговый список транзакций...")
 time.sleep(1)
-print(result)
+print(*result, sep="\n")

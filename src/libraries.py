@@ -15,41 +15,20 @@ def filter_by_state(transactions: list, search: str) -> list:
     return result
 
 
-def count_categories(transactions: list) -> Dict[str, int]:
+def count_categories(transactions: list, categories: dict) -> Dict[str, int]:
     """Функция, которая принимает на вход список словарей и возвращает словарь,
     в котором ключами являются категории операций, а значениями - количество операций в каждой категории."""
-    states_count: Dict[str, int] = Counter()
+    categories_count: Dict[str, int] = {category: 0 for category in categories.values()}
     for transaction in transactions:
-        state = transaction.get("state")
-        if state is not None:
-            states_count.update([state])
+        for key, value in transaction.items():
+            for category_key, category_value in categories.items():
+                if value == category_value and value is not None:
+                    categories_count[category_value] += 1
+    return categories_count
 
-    return states_count
 
-
-# transactions = [
-#     {
-#         "id": 441945886,
-#         "state": "CANCELED",
-#         "date": "2019-08-26T10:50:58.294041",
-#         "operationAmount": {"amount": "31957.58", "currency": {"name": "руб.", "code": "RUB"}},
-#         "description": "Перевод организации",
-#         "from": "Maestro 1596837868705199",
-#         "to": "Счет 64686473678894779589",
-#     },
-#     {
-#         "id": 41428829,
-#         "state": "EXECUTED",
-#         "date": "2019-07-03T18:35:29.512364",
-#         "operationAmount": {"amount": "8221.37", "currency": {"name": "USD", "code": "USD"}},
-#         "description": "Перевод организации",
-#         "from": "MasterCard 7158300734726758",
-#         "to": "Счет 35383033474447895560",
-#     },
-# ]
-
-# result = count_categories(read_json_file("../data/operations.json"))
+# result = count_categories(read_json_file("../data/operations.json"), {'category_1': "Перевод", 'category_2': "EXECUTED"})
 # print(result)
 
-res = filter_by_state((read_json_file("../data/operations.json")), "Перевод организации")
-print(res)
+# res = filter_by_state((read_json_file("../data/operations.json")), "Перевод организации")
+# print(res)
