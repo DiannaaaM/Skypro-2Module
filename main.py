@@ -22,9 +22,9 @@ def main(
     if user_input == "1":
         file = read_json_file(Path("data/operations.json"))
     elif user_input == "2":
-        file = open_file("../data/transactions.csv")
+        file = open_file(Path("data/transactions.csv"))
     else:
-        file = open_file("../data/transactions_excel.xlsx")
+        file = open_file(Path("data/transactions_excel.xlsx"))
 
     sort = sorted_list_by_value(file, type_of_sort.upper())
 
