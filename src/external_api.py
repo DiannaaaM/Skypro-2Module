@@ -11,20 +11,6 @@ from src.logger import setup_logging
 
 logger = setup_logging()
 
-load_dotenv()
-
-API_KEY = os.getenv("API_KEY")
-
-import json
-import logging
-import os
-from typing import Any, Dict
-
-import requests
-from dotenv import load_dotenv
-
-from src.logger import setup_logging
-
 logger = setup_logging()
 
 load_dotenv()
