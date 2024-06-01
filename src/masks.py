@@ -19,7 +19,7 @@ def mask_card(number: str) -> str:
 
 def mask_account(number: str) -> str:
     """Функция принимает на вход номер счёта и возвращает его маску."""
-    if len(number) == 21:
+    if len(number) >= 16:
         masked_number = "**" + number[-4:]
         logger.info("Функция mask_account выполнена успешно")
         return masked_number
