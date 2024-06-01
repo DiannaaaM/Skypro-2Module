@@ -1,5 +1,7 @@
 import time
+from pathlib import Path
 from typing import Any
+
 from src.external_api import get_currency_rate
 from src.generators import filter_by_currency, random_card_number, returned_description
 from src.libraries import count_categories, filter_by_state
@@ -9,13 +11,14 @@ from src.processing import sort_dicts_by_date, sorted_list_by_value
 from src.reader_csv_xlsx_files import open_file
 from src.utils import read_json_file, sum_amount
 from src.widget import get_data, mask_account_and_card
-from pathlib import Path
 
 
 def main(
-        user_input: str, type_of_sort: str, currency: Any = None, sort_of_date: Any = None, filter_by_word: Any = None
+    user_input: str, type_of_sort: str, currency: Any = None, sort_of_date: Any = None, filter_by_word: Any = None
 ) -> Any:
-    # Основная функция для обработки данных о финансовых транзакциях
+    """
+    Отвечает за основную логику проекта с пользователем и связывает функциональности между собой.
+    """
     if user_input == "1":
         file = read_json_file(Path("data/operations.json"))
     elif user_input == "2":
@@ -32,7 +35,9 @@ def main(
     if currency.lower() == "да":
         for value in sort:
             if "amount" in value["operationAmount"] and value["operationAmount"]["currency"]["code"] == "RUB":
-                sort = value["operationAmount"]["amount"] * get_currency_rate(value["operationAmount"]["currency"]["code"])
+                sort = value["operationAmount"]["amount"] * get_currency_rate(
+                    value["operationAmount"]["currency"]["code"]
+                )
 
     if filter_by_word is not None:
         sort = filter_by_state(sort, filter_by_word)
@@ -40,13 +45,15 @@ def main(
 
     result = []
     for value in sort:
-        date = get_data(value["date"])
+        date = get_data(value.get("date", ""))
         description = value["description"]
-        from_ = mask_account_and_card(value["from"])
-        to = mask_account_and_card(value["to"])
-        amount = value["operationAmount"]["amount"]
+        from_ = mask_account_and_card(value.get("from", ""))
+        to = mask_account_and_card(value.get("to", ""))
+        amount = value.get("operationAmount", {}).get("amount", {})
 
-        result.append(f"{date} {description}\n{from_} -> {to}\nСумма: {amount}\n")
+        # Создание строки с форматированием для  улучшения читаемости
+        transaction_string = f"{date} {description}\n{from_} -> {to}\nСумма: {amount}\n"
+        result.append(transaction_string)
 
     return result
 
@@ -72,7 +79,9 @@ if verification_date == "да":
     sort_of_date = input("Отсортировать по:" "\n1. возрастанию" "\n2. убыванию")
 
 user_currency = input("Выводить только рублевые тразакции? Да/Нет")
-Verification_filter_of_word = input("Отфильтровать список транзакций по определенному слову в описании? Да/Нет").capitalize()
+Verification_filter_of_word = input(
+    "Отфильтровать список транзакций по определенному слову в описании? Да/Нет"
+).capitalize()
 filter_by_word = None
 if Verification_filter_of_word == "Да":
     filter_by_word = input("Введите описание, по которому необходимо отсортировать\n").capitalize()
@@ -81,4 +90,3 @@ result = main(user_input, type_of_sort, user_currency, sort_of_date, filter_by_w
 print("Распечатываю итоговый список транзакций...")
 time.sleep(1)
 print(*result, sep="\n")
-main(user_input, type_of_sort, user_currency, sort_of_date, filter_by_word)
