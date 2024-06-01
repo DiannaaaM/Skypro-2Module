@@ -1,15 +1,17 @@
 from datetime import datetime
 from typing import List
+from typing import Any
 
 
-def sorted_list_by_value(input_list: List[dict], state: str = "EXECUTED") -> List[dict]:
+
+def sorted_list_by_value(file: Any, state: str = "EXECUTED") -> List[dict]:
     """Функция, которая принимает на вход список словарей и значение для ключа
     и возвращает новый список, содержащий только те словари, у которых ключ содержит переданное в функцию значение."""
-    return_list = []
-    for value in input_list:
-        if value["state"] == state:
-            return_list.append(value)
-    return return_list
+    result = []
+    for value in file:
+        if 'state' in value and value['state'] == state:
+            result.append(value)
+    return result
 
 
 def sort_dicts_by_date(input_list: List[dict], reverse: str = "desc") -> List[dict]:
