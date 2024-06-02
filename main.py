@@ -35,7 +35,7 @@ def main(
     if currency.lower() == "да":
         for value in sort:
             sort = value.get("operationAmount", {}).get("amount", {}) * get_currency_rate(
-                value.get("operationAmount", {}).get("currency", {})
+                value.get("operationAmount", {}).get("currency_code", {})
             )
 
     if filter_by_word is not None:
@@ -46,9 +46,9 @@ def main(
     for value in sort:
         date = get_data(value.get("date", ""))
         description = value["description"]
-        from_ = mask_account_and_card(value.get("from", ""))
+        from_ = mask_account_and_card(str(value.get("from", "")))
         to = mask_account_and_card(value.get("to", ""))
-        if "operationAmount" in value:
+        if "operationAmount" in value or "amount" in value:
             amount = sum_amount(value)
         else:
             amount = "0.0"
