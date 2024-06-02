@@ -11,8 +11,6 @@ from src.logger import setup_logging
 
 logger = setup_logging()
 
-logger = setup_logging()
-
 load_dotenv()
 
 API_KEY = os.getenv("API_KEY")
@@ -29,3 +27,5 @@ def get_currency_rate(currency: Any) -> Any:
     else:
         logging.error("С функцией get_currency_rate что-то пошло не так: %(error)s")
     return rate
+
+

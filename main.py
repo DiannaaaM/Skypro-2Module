@@ -34,10 +34,9 @@ def main(
 
     if currency.lower() == "да":
         for value in sort:
-            if "amount" in value["operationAmount"] and value["operationAmount"]["currency"]["code"] == "RUB":
-                sort = value["operationAmount"]["amount"] * get_currency_rate(
-                    value["operationAmount"]["currency"]["code"]
-                )
+            sort = value.get("operationAmount", {}).get("amount", {}) * get_currency_rate(
+                value.get("operationAmount", {}).get("currency", {})
+            )
 
     if filter_by_word is not None:
         sort = filter_by_state(sort, filter_by_word)
@@ -49,7 +48,10 @@ def main(
         description = value["description"]
         from_ = mask_account_and_card(value.get("from", ""))
         to = mask_account_and_card(value.get("to", ""))
-        amount = value.get("operationAmount", {}).get("amount", {})
+        if "operationAmount" in value:
+            amount = sum_amount(value)
+        else:
+            amount = "0.0"
 
         # Создание строки с форматированием для  улучшения читаемости
         transaction_string = f"{date} {description}\n{from_} -> {to}\nСумма: {amount}\n"

@@ -1,5 +1,6 @@
 import csv
 from typing import Any
+from pathlib import Path
 
 import pandas as pd
 
@@ -7,7 +8,8 @@ import pandas as pd
 def open_file(file_path: str) -> Any:
     """Открытие файлов с '.xlsx' или '.csv' расширениями"""
     transcriptions = []
-    if file_path.endswith(".csv"):
+    file_path = Path(file_path)
+    if file_path.suffix.lower() == ".csv":
         with open(file_path, "r", encoding="utf-8") as f:
             reader = csv.reader(f, delimiter=";")
             for row in reader:
@@ -26,7 +28,7 @@ def open_file(file_path: str) -> Any:
                 )
         transcriptions.pop(0)
         return transcriptions
-    elif file_path.endswith(".xlsx"):
+    elif file_path.suffix.lower() == ".xlsx":
         df = pd.read_excel(file_path)
         return df.to_dict(orient="records")
     else:

@@ -39,6 +39,8 @@ def sum_amount(transaction: dict) -> float:
         total += float(transaction["operationAmount"]["amount"]) * get_currency_rate("EUR")
     elif transaction.get("operationAmount", {}).get("currency", {}).get("code") == "USD":
         total += float(transaction["operationAmount"]["amount"]) * get_currency_rate("USD")
+    elif transaction.get("amount", {}):
+        total += float(transaction["amount"])
     if total:
         logging.info("Функция sum_amount выполнена успешно")
     else:

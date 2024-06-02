@@ -14,11 +14,11 @@ def mask_account_and_card(information: str) -> str:
             else:
                 masked_str += word + " "
         return masked_str.strip()
-    if "Visa" in information or "MasterCard" in information or "Maestro" in information:
+    if "Visa" in information or "MasterCard" in information or "Maestro" in information or "Discover" in information or "American" in information or "Mastercard" in information:
         words = information.split()
         masked_str = ""
         for word in words:
-            if word.isdigit() and len(word) >= 16:
+            if word.isdigit() and len(word) >= 11:
                 masked_str += mask_card(word) + " "
             else:
                 masked_str += word + " "
