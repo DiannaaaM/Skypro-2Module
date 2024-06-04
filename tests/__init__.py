@@ -153,3 +153,7 @@
 #     }
 #
 # print(sum_amount(transactions))
+
+
+# print(open_file('../data/transactions.csv'))
+# print(open_file('../data/transactions_excel.xlsx'))

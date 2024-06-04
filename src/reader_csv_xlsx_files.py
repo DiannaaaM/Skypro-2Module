@@ -35,5 +35,3 @@ def open_file(file_path: str) -> Any:
         return "Неверный формат файла"
 
 
-# print(open_file('../data/transactions.csv'))
-# print(open_file('../data/transactions_excel.xlsx'))
